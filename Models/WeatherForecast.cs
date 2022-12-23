@@ -1,4 +1,4 @@
-namespace ViteReduxTemplate;
+namespace ViteReduxTemplate.Models;
 
 public class WeatherForecast
 {

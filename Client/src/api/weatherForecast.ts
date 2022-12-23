@@ -1,29 +1,31 @@
 import { baseApi as api } from "@/api/baseApi";
-export const addTagTypes = ["Weatherforecast"] as const;
+export const addTagTypes = ["Weather-Forecasts"] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
   })
   .injectEndpoints({
     endpoints: (build) => ({
-      getWeatherForecast: build.query<
-        GetWeatherForecastApiResponse,
-        GetWeatherForecastApiArg
+      getWeatherForecasts: build.query<
+        GetWeatherForecastsApiResponse,
+        GetWeatherForecastsApiArg
       >({
-        query: () => ({ url: `/api/weatherForecast` }),
-        providesTags: ["Weatherforecast"],
+        query: () => ({ url: `/api/weather-forecasts` }),
+        providesTags: ["Weather-Forecasts"],
       }),
     }),
     overrideExisting: false,
   });
 export { injectedRtkApi as enhancedApi };
-export type GetWeatherForecastApiResponse =
-  /** status 200 Success */ WeatherForecast[];
-export type GetWeatherForecastApiArg = void;
+export type GetWeatherForecastsApiResponse = /** status 200 Success */ Response;
+export type GetWeatherForecastsApiArg = void;
 export type WeatherForecast = {
   date?: string;
   temperatureC?: number;
   temperatureF?: number;
   summary?: string | null;
 };
-export const { useGetWeatherForecastQuery } = injectedRtkApi;
+export type Response = {
+  weatherForecasts?: WeatherForecast[];
+};
+export const { useGetWeatherForecastsQuery } = injectedRtkApi;
