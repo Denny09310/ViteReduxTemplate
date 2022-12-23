@@ -1,0 +1,208 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Dennis Koja and Contributors",
+	"classifications": ["Aspnet", "React", "Vite", "Typescript", "Web"],
+	"identity": "NoneEngine.AspnetTemplate.Vite.CSharp",
+	"name": "Vite Redux Web Application",
+	"shortName": "vite-redux",
+	"tags": {
+		"type": "project",
+		"language": "C#"
+	},
+	"sourceName": "ViteReduxTemplate",
+	"defaultName": "ViteReduxApplication",
+	"description": "Web application using Vite with redux as frontend",
+	"preferNameDirectory": true,
+	"sources": [
+		{
+			"source": "./",
+			"target": "./",
+			"include": ["**/*"],
+			"exclude": [
+				"**/[Bb]in/**",
+				"**/[Oo]bj/**",
+				"**/[Dd]ist/**",
+				"**/[Nn]ode_[Mm]odules/**",
+				"*.Development.csproj",
+				".template.config/**/*",
+				".vscode/**",
+				"**/*.filelist",
+				"**/*.user",
+				"**/*.lock.json",
+				"**/*-lock.yaml"
+			]
+		}
+	],
+	"symbols": {
+		"kestrelHttpPort": {
+			"type": "parameter",
+			"datatype": "int",
+			"description": "Port number to use for the HTTP endpoint in launchSettings.json."
+		},
+		"kestrelHttpPortGenerated": {
+			"type": "generated",
+			"generator": "port",
+			"parameters": {
+				"low": 5000,
+				"high": 5300
+			}
+		},
+		"kestrelHttpPortReplacer": {
+			"type": "generated",
+			"generator": "coalesce",
+			"parameters": {
+				"sourceVariableName": "kestrelHttpPort",
+				"fallbackVariableName": "kestrelHttpPortGenerated"
+			},
+			"replaces": "5000"
+		},
+		"kestrelHttpsPort": {
+			"type": "parameter",
+			"datatype": "int",
+			"description": "Port number to use for the HTTPS endpoint in launchSettings.json. This option is only applicable when the parameter no-https is not used (no-https will be ignored if either IndividualAuth or OrganizationalAuth is used)."
+		},
+		"kestrelHttpsPortGenerated": {
+			"type": "generated",
+			"generator": "port",
+			"parameters": {
+				"low": 7000,
+				"high": 7300
+			}
+		},
+		"kestrelHttpsPortReplacer": {
+			"type": "generated",
+			"generator": "coalesce",
+			"parameters": {
+				"sourceVariableName": "kestrelHttpsPort",
+				"fallbackVariableName": "kestrelHttpsPortGenerated"
+			},
+			"replaces": "5001"
+		},
+		"iisHttpPort": {
+			"type": "parameter",
+			"datatype": "int",
+			"description": "Port number to use for the IIS Express HTTP endpoint in launchSettings.json."
+		},
+		"iisHttpPortGenerated": {
+			"type": "generated",
+			"generator": "port"
+		},
+		"iisHttpPortReplacer": {
+			"type": "generated",
+			"generator": "coalesce",
+			"parameters": {
+				"sourceVariableName": "iisHttpPort",
+				"fallbackVariableName": "iisHttpPortGenerated"
+			},
+			"replaces": "8080"
+		},
+		"iisHttpsPort": {
+			"type": "parameter",
+			"datatype": "int",
+			"description": "Port number to use for the IIS Express HTTPS endpoint in launchSettings.json. This option is only applicable when the parameter no-https is not used (no-https will be ignored if either IndividualAuth or OrganizationalAuth is used)."
+		},
+		"iisHttpsPortGenerated": {
+			"type": "generated",
+			"generator": "port",
+			"parameters": {
+				"low": 44300,
+				"high": 44399
+			}
+		},
+		"iisHttpsPortReplacer": {
+			"type": "generated",
+			"generator": "coalesce",
+			"parameters": {
+				"sourceVariableName": "iisHttpsPort",
+				"fallbackVariableName": "iisHttpsPortGenerated"
+			},
+			"replaces": "44300"
+		},
+		"pathbaseWithoutFirstSlashGenerated": {
+			"type": "generated",
+			"generator": "regex",
+			"replaces": "{NoFirstSlashPathbase}",
+			"parameters": {
+				"source": "Pathbase",
+				"steps": [
+					{
+						"regex": "^.(.*)$",
+						"replacement": "$1"
+					}
+				]
+			}
+		},
+		"pathbaseWithoutLasttSlashGenerated": {
+			"type": "generated",
+			"generator": "regex",
+			"replaces": "{NoLastSlashPathbase}",
+			"parameters": {
+				"source": "Pathbase",
+				"steps": [
+					{
+						"regex": "^(.*).$",
+						"replacement": "$1"
+					}
+				]
+			}
+		},
+		"ProxyPort": {
+			"type": "parameter",
+			"datatype": "int",
+			"description": "Port number to use for the SPA front-end development proxy."
+		},
+		"ProxyPortGenerated": {
+			"type": "generated",
+			"generator": "port",
+			"parameters": {
+				"low": 44400,
+				"high": 44499
+			}
+		},
+		"ProxyPortReplacer": {
+			"type": "generated",
+			"generator": "coalesce",
+			"parameters": {
+				"sourceVariableName": "ProxyPort",
+				"fallbackVariableName": "ProxyPortGenerated"
+			},
+			"replaces": "3000"
+		},
+		"PackageManager": {
+			"description": "The JavaScript package manager to configure your project with",
+			"type": "parameter",
+			"datatype": "choice",
+			"choices": [
+				{
+					"choice": "yarn",
+					"description": "Use Yarn as default package manager"
+				},
+				{
+					"choice": "pnpm",
+					"description": "Use Pnpm as default package manager"
+				}
+			],
+			"defaultValue": "pnpm",
+			"replaces": "{PackageManager}"
+		},
+		"Pathbase": {
+			"type": "parameter",
+			"datatype": "string",
+			"description": "The base path from which the application is served",
+			"defaultValue": "/",
+			"replaces": "{Pathbase}"
+		}
+	},
+	"postActions": [
+		{
+			"description": "Restore NuGet packages required by this project.",
+			"manualInstructions": [{ "text": "Run 'dotnet restore'" }],
+			"actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+			"continueOnError": true,
+			"args": {
+				"files": ["ViteReduxTemplate.csproj"]
+			}
+		}
+	]
+}
+
