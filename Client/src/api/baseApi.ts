@@ -2,10 +2,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { serialize } from 'object-to-formdata';
 
+const baseUrl = import.meta.env.DEV ? '/' : import.meta.env.BASE_URL;
+
 // initialize an empty api service that we'll inject endpoints into later as needed
 export const baseApi = createApi({
 	baseQuery: fetchBaseQuery({
-		baseUrl: import.meta.env.BASE_URL,
+		baseUrl,
 		credentials: 'include',
 	}),
 	endpoints: () => ({}),
@@ -13,4 +15,4 @@ export const baseApi = createApi({
 
 export function toFormData<T extends Object>(object: T) {
 	return serialize(object) as unknown as T;
-};
+}
