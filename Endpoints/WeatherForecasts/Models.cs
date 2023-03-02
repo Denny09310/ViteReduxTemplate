@@ -1,6 +1,6 @@
 ﻿using ViteReduxTemplate.Models;
 
-namespace ViteReduxTemplate.WeatherForecasts.Get;
+namespace WeatherForecasts;
 
 public class Response
 {
