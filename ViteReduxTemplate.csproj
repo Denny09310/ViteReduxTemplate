@@ -19,23 +19,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FastEndpoints.Generator" Version="5.5.0">
+    <PackageReference Include="FastEndpoints.Generator" Version="5.6.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="FastEndpoints.Swagger" Version="5.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.1" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.2" />
   </ItemGroup>
 
+  <!-- Don't publish the SPA source files, but do show them in the project files list -->
   <ItemGroup>
-    <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <!-- Ensure Node.js is installed -->
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
-    <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
     </Exec>
@@ -44,8 +44,8 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="{PackageManager} install" />
   </Target>
 
+  <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
-    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="{PackageManager} install" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
 

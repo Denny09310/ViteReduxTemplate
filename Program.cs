@@ -1,3 +1,4 @@
+global using FastEndpoints;
 using System.Text.Json.Serialization;
 using FastEndpoints.Swagger;
 using ViteReduxTemplate.PostProcessors;
