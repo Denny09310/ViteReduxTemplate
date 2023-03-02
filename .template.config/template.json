@@ -182,7 +182,7 @@
 					"description": "Use Pnpm as default package manager"
 				}
 			],
-			"defaultValue": "pnpm",
+			"defaultValue": "yarn",
 			"replaces": "{PackageManager}"
 		},
 		"Pathbase": {
